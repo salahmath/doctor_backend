@@ -8,8 +8,7 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ["admin", "client"], default: "client" },
   phone: { type: String },
   isBlocked: { type: Boolean, default: false},
-  birth:{type: Date,
-    required: true}
+  birth:{type: Date}
 }, { timestamps: true });
 
 // Hash du mot de passe avant de sauvegarder
