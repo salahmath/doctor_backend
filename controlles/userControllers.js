@@ -63,6 +63,20 @@ exports.users = async (req, res) => {
       });
   }
 };
+exports.user = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    res.status(200).json(user);
+  } catch (err) {
+    res
+      .status(500)
+      .json({
+        message: "Erreur lors de la récupération des utilisateurs",
+        error: err.message,
+      });
+  }
+};
 exports.updateUser=async (req,res)=>{
     const { id } = req.params;
     try {
