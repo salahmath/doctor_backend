@@ -3,12 +3,13 @@ const News = require('../models/news');
 // Créer une actualité (Admin uniquement)
 exports.createNews = async (req, res) => {
   try {
-    const { title, content, image } = req.body;
+    const { title, content, image,source } = req.body;
 
     const news = new News({
       title,
       content,
       image,
+      source
     });
 
     await news.save();
