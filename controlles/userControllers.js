@@ -10,7 +10,6 @@ exports.register = async (req, res) => {
     const userExists = await User.findOne({ email });
     if (userExists)
       return res.status(400).json({ message: "Utilisateur déjà existant" });
-
     const user = await User.create({ name,phone,email, password, role, birth });
     res.status(201).json({ message: "Inscription réussie", user });
   } catch (error) {
@@ -33,7 +32,7 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: user._id }, "your_jwt_secret", {
       expiresIn: "1d",
     });
-    res.status(200).json({ message: "Connexion réussie", token });
+    res.status(200).json({ message: "Connexion réussie", token,user });
   } catch (error) {
     res.status(500).json({ message: "Erreur lors de la connexion", error });
   }
@@ -54,6 +53,20 @@ exports.users = async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
+  } catch (err) {
+    res
+      .status(500)
+      .json({
+        message: "Erreur lors de la récupération des utilisateurs",
+        error: err.message,
+      });
+  }
+};
+exports.user = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    res.status(200).json(user);
   } catch (err) {
     res
       .status(500)
