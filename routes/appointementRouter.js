@@ -5,7 +5,8 @@ const {
   getMyAppointments, 
   getAllAppointments, 
   updateAppointment, 
-  deleteAppointment
+  deleteAppointment,
+  getAllAppNonRejected
 } = require('../controlles/appointmentController');
 const { authMiddleware } = require('../authmidellware/index');
 const { isAdmin } = require('../controlles/userControllers');
@@ -15,6 +16,8 @@ router.post('/createApp', authMiddleware, createAppointment);
 router.get('/mine', authMiddleware, getMyAppointments);
 
 // isAdmin routes
+
+router.get('/getAllappNrej', getAllAppNonRejected);
 router.get('/getAllapp', getAllAppointments);
 router.put('/updateApp/:id', authMiddleware, isAdmin, updateAppointment);
 router.delete('/deleteApp/:id', authMiddleware, isAdmin, deleteAppointment);
