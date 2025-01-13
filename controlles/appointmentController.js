@@ -35,6 +35,16 @@ exports.getAllAppointments = async (req, res) => {
     res.status(500).json({ message: 'Error fetching appointments', error });
   }
 };
+exports.getAllAppNonRejected = async (req, res) => { 
+  try {
+    const appointments = await Appointment.find({ status: { $ne: 'rejected' } })
+      .populate('clientId', 'name email');
+    
+    res.status(200).json(appointments);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching appointments', error });
+  }
+};
 
 // Mettre à jour un rendez-vous (admin uniquement)
 exports.updateAppointment = async (req, res) => {
