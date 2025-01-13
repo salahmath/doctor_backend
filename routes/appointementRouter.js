@@ -15,7 +15,7 @@ router.post('/createApp', authMiddleware, createAppointment);
 router.get('/mine', authMiddleware, getMyAppointments);
 
 // isAdmin routes
-router.get('/getAllapp',  isAdmin, getAllAppointments);
+router.get('/getAllapp', getAllAppointments);
 router.put('/updateApp/:id', authMiddleware, isAdmin, updateAppointment);
 router.delete('/deleteApp/:id', authMiddleware, isAdmin, deleteAppointment);
 
