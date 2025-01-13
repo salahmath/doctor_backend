@@ -19,7 +19,7 @@ exports.createAppointment = async (req, res) => {
 // Récupérer les rendez-vous d’un client connecté
 exports.getMyAppointments = async (req, res) => {
   try {
-    const appointments = await Appointment.find({ clientId: req.user });
+    const appointments = await Appointment.find({ clientId: req.user }).populate('clientId');;
     res.status(200).json(appointments);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching appointments', error });
